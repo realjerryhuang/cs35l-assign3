@@ -1,0 +1,24 @@
+Jerry Huang
+UID: 906454919
+
+In App.js, I created a component consisting of a function called Square that is accessible outside the file. The function returns a button with the property className="square".
+Nine squares were made in total by duplicating the <button>...</button> snippet only. For each, I also replaced X with the corresponding number from 1-9.
+Since these nine squares appear all in a row, I then made dividers and created classes called board-row for each grouping of three squares.
+I then renamed the function from "Square" to "Board" to more accurately reflect its purpose.
+
+To implement the X's, I first created a new Square function above Board defined by my first square from board. Then, I replaced all the square buttons in board with <Square />.
+Since each square now displays 1 instead of their appropriate numbers from 1-9, I updated the Square component to read the value prop that Board passes. 
+This value prop needs to be placed in curly braces so that the actual value stored inside is read, not the word "value."
+Then, I added the value prop to every square in Board, with each one set to its corresponding number from 1-9.
+
+To further make each square interactive by filling it with an X when clicked, I then created a function called handleClick inside the Square component.
+handleClick prints "clicked!" to the console every time it is called. I then added onClick to the props of the button returned in Square.
+To make the squares remember when they've been clicked, I imported useState and removed value props in Square, adding a new line that calls useState.
+Accordingly, I removed all the value="N"s from Board. I also replaced the console message with setValue('X'); in Square.
+I then tested it out, and saw that when I clicked on a square, an "X" appeared.
+
+In Board, I created an array with nine elements, each set to null and corresponding to the value of a square. Then, I had my Board component pass the value prop down to each Square with value={squares[N]}.
+Then, I replaced everything inside function Square so that it receives the value prop from the Board component instead.
+
+In Square, I created a function called onSquareClick that is called upon a click. This was then passed to Board. A handleClick function was then defined to update squares.
+This was generalized to all the squares in Board.
