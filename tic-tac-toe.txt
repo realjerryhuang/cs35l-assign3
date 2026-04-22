@@ -22,3 +22,8 @@ Then, I replaced everything inside function Square so that it receives the value
 
 In Square, I created a function called onSquareClick that is called upon a click. This was then passed to Board. A handleClick function was then defined to update squares.
 This was generalized to all the squares in Board.
+
+To allow players to take turns, in handleClick, I created a conditional statement to alternate between "X" and "O" being written in a square.
+To check whether or not a square has already been filled, I added a condition to handleClick where it returns early if the square already has an X or O.
+
+In order to declare a winner, I created a helper function called calculateWinner. This function was added to handleClick, as well as a status message.
