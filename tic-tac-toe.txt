@@ -27,3 +27,16 @@ To allow players to take turns, in handleClick, I created a conditional statemen
 To check whether or not a square has already been filled, I added a condition to handleClick where it returns early if the square already has an X or O.
 
 In order to declare a winner, I created a helper function called calculateWinner. This function was added to handleClick, as well as a status message.
+
+To keep track of the game history, I created a new component called Game. "export default" was removed from Board and added to Game, making Game the new top-level component.
+I added a state to the Game component to keep track of whose turn is next and the move history. A handlePlay function was created.
+
+Next, the board was changed so that it is controlled by the props it takes in. I replaced setSquares and setXIsNext in this component with onPlay.
+A new array was created containing all the items in history. 
+
+To display and allow interaction with this history of moves, a new function called jumpTo was created in Game. Using map, I turned the move history into React elements representing buttons so that the user can jump to past moves.
+Keys were created to assign each move a unique ID.
+
+The jumpTo function was updated to be able to update currentMove and control xIsNext. handlePlay is then changed so that going back in time and making a new move overrides all the history after that point, and currentMove is updated each time this happens.
+
+Finally, the code was cleaned up to remove redundant checks.
