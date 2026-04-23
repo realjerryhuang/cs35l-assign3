@@ -1,0 +1,22 @@
+Jerry Huang
+UID: 906454919
+
+My first step to expand on tic-tac-toe is to implement a function called getStage, which keeps track of the stage of the game.
+The game can be thought of in two stages: first, when the players have up to three "pieces" on the board, in which they are free to place more "pieces."
+The second stage is after they've each placed three "pieces" down, after which they can only move pieces. 
+To implement getStage, I used .filter on the board to get the count of the pieces on the board that match the current player's mark.
+
+Using getStage, I added a third check to the existing code, specifically Board, to return early if the stage of the game is "move," since the previously writen tic-tac-toe code is only valid for the game in "place" mode.
+Next, I added functionality to see if a square is one that the player selects as the source or the destination for a move. Then, I added the corresponding props, selectedSquare and setSelectedSquare, to Board.
+
+Movement stage logic was then added to handleClick in board. If selectedSquare is null, the player is selecting a piece, and we check that they are selecting a piece that they own, and then setSelectedSquare(i).
+Otherwise, on the second click, we check that the destination is empty, and then perform a slice, and nextSquares[i] = player.
+
+Next, I checked that the new destination is a valid move, i.e., that it is adjacent to where the piece currently is. I wrote a helper function called isAdjacent(from, to) to accomplish this.
+It returns true if two squares are adjacent and false otherwise. I implemented this by converting the position "to" and "from" into rows and columns, then checking to make sure the move was not the to the same square or that the move was bigger than 1 in either direction.
+This check was also added to handleClick.
+
+Next, I implemented the "return to last move" if the selected destination is invalid. I did this by having handleClick call setSelectedSquare(null) before returning early if invalid.
+
+The final part was implementing the center check logic. This was added in the second click branch after the adjacency check. I added a check to see if the middle square is occupied by the current player, if the next move would result in a win, and if the middle square is still occupied by the player.
+If the player occupies the center before the move, and the move does not win the game or vacate the center, the move is invalid and is rejected.
