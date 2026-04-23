@@ -155,6 +155,38 @@ class TestChorusLapilli(unittest.TestCase):
         tiles[0].click()
         self.assertTileIs(tiles[0], self.SYMBOL_X)
 
+    def test_alternating_turns(self):
+        '''Check that turns alternate between X and O.'''
+        tiles = self.driver.find_elements(By.XPATH, self.BOARD_TILE_XPATH)
+        tiles[0].click()
+        self.assertTileIs(tiles[0], self.SYMBOL_X)
+        tiles[1].click()
+        self.assertTileIs(tiles[1], self.SYMBOL_O)
+        tiles[2].click()
+        self.assertTileIs(tiles[2], self.SYMBOL_X)
+
+    def test_cannot_overwrite_tile(self):
+        '''Check that clicking an occupied tile does not overwrite it.'''
+        tiles = self.driver.find_elements(By.XPATH, self.BOARD_TILE_XPATH)
+        tiles[0].click()
+        self.assertTileIs(tiles[0], self.SYMBOL_X)
+        tiles[0].click()
+        self.assertTileIs(tiles[0], self.SYMBOL_X)
+
+    def test_movement_phase_moves_piece(self):
+        '''Check that in the movement phase, a piece moves from source to destination.'''
+        tiles = self.driver.find_elements(By.XPATH, self.BOARD_TILE_XPATH)
+        tiles[0].click()  # X
+        tiles[1].click()  # O
+        tiles[2].click()  # X
+        tiles[5].click()  # O
+        tiles[6].click()  # X, enters move phase
+        tiles[8].click()  # O, enters move phase
+        tiles[0].click()  # select X's piece at 0
+        tiles[3].click()  # move to 3
+        self.assertTileIs(tiles[0], self.SYMBOL_BLANK)
+        self.assertTileIs(tiles[3], self.SYMBOL_X)
+
 
 # ================= [DO NOT MAKE ANY CHANGES BELOW THIS LINE] =================
 

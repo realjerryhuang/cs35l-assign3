@@ -20,3 +20,8 @@ Next, I implemented the "return to last move" if the selected destination is inv
 
 The final part was implementing the center check logic. This was added in the second click branch after the adjacency check. I added a check to see if the middle square is occupied by the current player, if the next move would result in a win, and if the middle square is still occupied by the player.
 If the player occupies the center before the move, and the move does not win the game or vacate the center, the move is invalid and is rejected.
+
+To test this code, I wrote three tests:
+1. test_alternating_turns, which verifies that turns alternate correctly between X and O by clicking three squares in sequence and checking that the first and third are X and the second is O.
+2. test_cannot_overwrite_tile, which verifies that clicking an already-occupied tile does nothing, by placing an X on a tile and checking that a second click does not replace it with "O."
+3. test_movement_phase_moves_piece, which places three pieces per player without triggering a win, and selecting an X piece and moving it to an adjacent square.
